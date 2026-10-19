@@ -1,0 +1,27 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="../src/chat-layout.css">
+<style>body{margin:0;font:14px system-ui}main{margin-left:120px}#viewport{height:600px;overflow:auto;padding:0 60px}article{height:300px;padding-top:10px;box-sizing:border-box}#result{display:none}#composer{padding:20px 60px}</style>
+<main><div id="viewport" data-testid="autoscroll-viewport"></div><div id="composer"><button id="trigger">Gemini</button></div></main><pre id="result"></pre>
+<script src="../src/history-navigation.js"></script><script>
+window.onerror=(message)=>{document.getElementById('result').textContent=JSON.stringify({ok:false,error:String(message)})};
+const viewport=document.getElementById('viewport'),trigger=document.getElementById('trigger');
+const passed=[],check=(name,value)=>{if(!value)throw Error(name);passed.push(name)},wait=(ms=140)=>new Promise(r=>setTimeout(r,ms));
+const user=(index,text='提问 '+index)=>({step:{case:'userInput',value:{query:text}},metadata:{sourceTrajectoryStepInfo:{stepIndex:index}}});
+const all=Array.from({length:100},(_,i)=>i%10===0?user(i):{step:{case:'plannerResponse',value:{}}});
+let state={conversationId:'a',trajectorySlice:{totalStepsLength:100,stepsSlice:{startIndex:80},stepsInSlice:all.slice(80)}},requests=[],mode='normal',release;
+function render(steps){viewport.replaceChildren();for(const step of steps.filter(s=>s.step.case==='userInput')){const node=document.createElement('article');node.dataset.testid='user-input-step';node.textContent=step.step.value.query;node.__reactFiber$test={memoizedProps:{userStepIndex:step.metadata.sourceTrajectoryStepInfo.stepIndex}};viewport.append(node)}}
+const provider={getState:()=>state,async requestPageUpdate(range){requests.push(range);if(mode==='error')throw Error('offline');if(mode==='defer'){await new Promise(r=>release=r);return;}state.trajectorySlice.stepsSlice=range;state.trajectorySlice.stepsInSlice=all.slice(range.startIndex,range.endIndexExclusive);render(state.trajectorySlice.stepsInSlice);nav.update({provider});}};
+render(state.trajectorySlice.stepsInSlice);const nav=installHistoryNavigation(trigger);nav.update({provider});nav.ingest(all,'a');nav.update({provider});
+const rail=()=>document.querySelector('.ag-history-rail'),tick=i=>rail().querySelector(`[data-step-index="${i}"]`);
+(async()=>{
+await wait();check('complete history indexed beyond loaded page',rail().children.length===10&&viewport.children.length===2);check('rail visible and left of content',!rail().hidden&&rail().getBoundingClientRect().right<viewport.firstElementChild.getBoundingClientRect().left);check('no scrolling merely from indexing',viewport.scrollTop===0);check('active tick matches visible question',tick(80).getAttribute('aria-current')==='true');
+tick(0).dispatchEvent(new PointerEvent('pointerenter'));check('hover previews the matching question',document.querySelector('.ag-history-preview').textContent==='提问 0');tick(0).dispatchEvent(new PointerEvent('pointerleave'));check('preview hides on leave',document.querySelector('.ag-history-preview').hidden);
+tick(30).click();await wait();check('unloaded question invokes native paging',requests.length===1&&requests[0].startIndex<=30&&requests[0].endIndexExclusive>30);check('jump aligns target after pagination',Math.abs(viewport.querySelector('article:nth-child(2)').getBoundingClientRect().top-viewport.getBoundingClientRect().top-24)<2);check('jump ends without sticky scroll lock',!rail().hasAttribute('aria-busy'));check('active tick follows jump',tick(30).getAttribute('aria-current')==='true');
+const before=requests.length;tick(40).click();await wait();check('loaded target requires no page request',requests.length===before);viewport.scrollTop=100;await wait();check('manual scrolling is not overwritten',viewport.scrollTop===100);viewport.scrollTop=200;await wait();check('reply reading keeps its preceding question active',tick(20).getAttribute('aria-current')==='true');
+tick(40).focus();tick(40).dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}));check('keyboard navigates adjacent ticks',document.activeElement===tick(50));tick(50).dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));check('escape returns focus to model',document.activeElement===trigger);
+mode='error';tick(0).click();await wait();check('failed page clears busy state',!rail().hasAttribute('aria-busy'));check('failed page shows retry hint',document.querySelector('.ag-history-preview').textContent==='暂时无法定位，请重试');
+mode='defer';tick(0).click();await wait(20);state={conversationId:'b',trajectorySlice:{totalStepsLength:2,stepsSlice:{startIndex:0},stepsInSlice:[user(0,'新会话')]}};render(state.trajectorySlice.stepsInSlice);nav.update({provider});nav.ingest(all,'a');release();await wait();check('conversation switch clears old captions and stale request',rail().hidden&&rail().children.length===0&&!rail().hasAttribute('aria-busy'));check('stale full history ignored',!nav.hasIndex('b'));
+nav.ingest([user(0,'新会话'),user(1,'第二条')],'b');nav.update({provider});await wait();check('new conversation gets independent index',rail().children.length===2&&tick(0).getAttribute('aria-label').includes('新会话'));
+nav.dispose();check('dispose removes rail and preview',!document.querySelector('.ag-history-rail')&&!document.querySelector('.ag-history-preview'));
+result.textContent=JSON.stringify({ok:true,count:passed.length,passed},null,2);
+})().catch(e=>result.textContent=JSON.stringify({ok:false,error:e.message,passed}));
+</script>

@@ -1,0 +1,18 @@
+# Generated client resources and local backups
+*.asar
+*.asar.*
+*.building
+backups/
+build-manifest.json
+*.zip
+*.log
+.env
+.env.*
+node_modules/
+# Browser test artifacts and profiles
+tests/*-report.json
+tests/*.png
+tests/background-preload.js
+tests/edge-*/
+.DS_Store
+Thumbs.db

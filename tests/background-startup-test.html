@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><body><pre id="result"></pre>
+<script>
+window.requestAnimationFrame=()=>1;
+Object.defineProperty(document,'hidden',{get:()=>true});
+const electron_1={webFrame:{executeJavaScript:code=>Promise.resolve((0,eval)(code))}};
+</script><script src="background-preload.js"></script><script>
+setTimeout(()=>{
+ const box=document.createElement('div');box.dataset.testid='agent-input-box';
+ box.innerHTML='<button id="localized">New Conversation</button><div><button data-testid="model-selector-trigger">Gemini Flash</button></div>';
+ document.body.append(box);
+ setTimeout(()=>{const checks={background:document.hidden,translation:document.getElementById('localized').textContent==='新建对话',style:!!document.getElementById('antigravity-zh-cn-style'),meter:!!box.querySelector('.ag-context-meter'),metrics:!!box.querySelector('.ag-usage-strip')};result.textContent=JSON.stringify({ok:Object.values(checks).every(Boolean),count:5,checks});},350);
+},30);
+</script>

@@ -1,0 +1,742 @@
+Conversation Name	会话名称
+Conversation name	会话名称
+Conversation ID	会话 ID
+Project Name	项目名称
+Workspace Name	工作区名称
+Worktree Name	工作树名称
+Split	拆分视图
+Split Right	向右拆分
+Split Down	向下拆分
+Replace With New	替换为新会话
+Remove From Split	移出拆分视图
+Equalize Split Panes	均分面板大小
+Copy Conversation Markdown	复制会话 Markdown
+Copy conversation markdown	复制会话 Markdown
+Copy Trajectory ID	复制执行记录 ID
+View Debug	查看调试信息
+Fork	创建会话分支
+Share	分享
+Restore	取消归档
+Conversation Telemetry	会话遥测信息
+Share Conversation (Preview)	分享会话（预览）
+Conversation Archived	会话已归档
+Failed to rename conversation	重命名会话失败
+Failed to stop conversation	停止会话失败
+Accept Step	接受此步骤
+Reject Step	拒绝此步骤
+Toggle File Viewer	显示或隐藏文件查看器
+Toggle Overview Panel	显示或隐藏概览面板
+Continue Response	继续回复
+Close Terminal Tab	关闭终端标签页
+New Tab	新建标签页
+Add to Chat	添加到对话
+Quote Selection	引用所选内容
+Open in Code Search	在代码搜索中打开
+Comment on Selection	评论所选内容
+Go Back in Pane	在面板中后退
+Go Forward in Pane	在面板中前进
+Complete Onboarding Step	完成引导步骤
+Open Commit Graph	打开提交历史图
+Open Conversation	打开会话
+Archive / Restore	归档／取消归档
+Terminal: Add to Chat	终端：添加到对话
+Restart Main Language Server	重启主语言服务器
+Archive This Conversation	归档此会话
+Pin This Conversation	置顶此会话
+Unpin This Conversation	取消置顶此会话
+Find in Conversation	在会话中查找
+Toggle Between Light/Dark Themes	切换浅色／深色主题
+Rename This Conversation	重命名此会话
+Move to New Group	移至新分组
+Remove from Group	移出分组
+Open Trajectory Debug View	打开执行记录调试视图
+File Explorer	文件资源管理器
+Loading	正在加载
+Select All	全选
+Inline Actions	浮动操作卡片
+Chief of Staff	总管助手
+Autonomous Mode	自主模式
+Add inline comment	添加行内评论
+Edit comment	编辑评论
+Delete comment	删除评论
+Searching	正在搜索
+Cut	剪切
+Paste	粘贴
+Copy Image	复制图片
+No Model Selected	尚未选择模型
+Every command requires approval.	每条命令都需要批准。
+Ask before sensitive operations.	执行敏感操作前询问。
+Vetted (Preview)	安全审核（预览）
+Security agent decides if commands run.	由安全智能体决定是否运行命令。
+Auto (Preview)	自动（预览）
+Automatically decide if commands run.	自动决定是否运行命令。
+Turbo	完全访问
+Run all commands without restrictions.	不加限制地运行所有命令。
+Context Menus	右键菜单
+Suggestions	建议
+Quota	额度
+Default Customizations	默认自定义配置
+Updater	更新程序
+Confirm Window Reload	重新加载窗口前确认
+Command Setup Script	命令初始化脚本
+Sandbox Allow Network	允许沙箱联网
+Agent Host Address	智能体主机地址
+Enable Notifications for Agent	启用智能体通知
+Custom Context Menus	自定义右键菜单
+Markdown Artifact Width	Markdown 成果文件宽度
+Include Jetski Default Customizations	包含 Jetski 默认自定义配置
+Nickname	设备昵称
+Default Workspace VCS	默认工作区版本控制系统
+Default Cog Repository	默认 Cog 仓库
+Default Cog Branch / Ref	默认 Cog 分支／引用
+Sync JJ Worktrees to Head	将 JJ 工作树同步至最新提交
+Use full VCS clones for Best of N	多候选生成使用完整版本库克隆
+Use full Git clones for Best of N	多候选生成使用完整 Git 克隆
+Before	修改前
+After	修改后
+Enter a URL (e.g. http://localhost:8080)	输入网址（例如 http://localhost:8080）
+Address bar	地址栏
+Reload	重新加载
+Open in new tab	在新标签页中打开
+About embedding	关于嵌入显示
+View or edit comment	查看或编辑评论
+Click to view or edit comment	点击查看或编辑评论
+Forward	前进
+Open in external browser	在外部浏览器中打开
+Open in Preview Tab	在预览标签页中打开
+Embedded web preview	内嵌网页预览
+Open in Built-in Browser	在内置浏览器中打开
+Dismiss Tip	关闭提示
+Browse the Marketplace	浏览插件市场
+Explore the plugin marketplace	浏览插件市场
+Tip	提示
+Last 7 days	最近 7 天
+New Workspace	新建工作区
+Group By Workspace	按工作区分组
+Group By Project	按项目分组
+Sidebar grouped by workspace	侧边栏已按工作区分组
+Sidebar grouped by project	侧边栏已按项目分组
+Updated sidebar grouping	已更新侧边栏分组
+Create a Plugin with the Agent	让智能体创建插件
+Create plugin	创建插件
+Built In	内置
+Dismiss error	关闭错误提示
+Folders these agents can access.	这些智能体可访问的文件夹。
+Access grants	访问授权
+Commands and files these agents can use.	这些智能体可使用的命令和文件。
+Delete Task	删除任务
+UI Plugins	界面插件
+Sidecar error	辅助服务错误
+Add MCP Server	添加 MCP 服务器
+Search MCP servers by name	按名称搜索 MCP 服务器
+Clear search	清除搜索
+MCP Install Error:	MCP 安装错误：
+Delete MCP Server	删除 MCP 服务器
+Delete Skill	删除技能
+Ready	就绪
+Pending	等待处理
+Enter authorization code...	输入授权码……
+Skills and Rules Settings	技能与规则设置
+Skills & Rules	技能与规则
+Custom Agent Error:	自定义智能体错误：
+Copy Config File Path	复制配置文件路径
+UI Extensions	界面扩展
+See more results	查看更多结果
+Accounts	账户
+Signed-in accounts	已登录账户
+Context usage	上下文用量
+Close Logs Modal	关闭日志窗口
+Starting	正在启动
+Backoff	等待重试
+Unknown	未知
+Copy command	复制命令
+Readme	说明文档
+MCP servers	MCP 服务器
+Hooks	钩子
+UI extensions	界面扩展
+MCP Authentication Error:	MCP 认证错误：
+Plugin details	插件详情
+Setup required	需要设置
+Plugin metadata	插件元数据
+Customizations views	自定义配置视图
+Search customizations...	搜索自定义配置……
+Amend succeeded	已修改上次提交
+Commit	提交
+Failed to Generate Commit Message	生成提交说明失败
+Commit succeeded	提交成功
+Failed to Commit	提交失败
+Amend	修改上次提交
+Failed to Amend	修改上次提交失败
+Push	推送
+Push succeeded	推送成功
+Failed to Push	推送失败
+Include unstaged changes	包含未暂存的更改
+Unstage change	取消暂存此更改
+Stage change	暂存此更改
+Discard unstaged changes	丢弃未暂存的更改
+Added (Staged)	新增（已暂存）
+Untracked (Unstaged)	未跟踪（未暂存）
+Modified	已修改
+Renamed	已重命名
+Import AI Studio Project	导入 AI Studio 项目
+Type absolute path or navigate folders...	输入绝对路径或浏览文件夹……
+Open Preview	打开预览
+Delete Terminal	删除终端
+Standalone Terminals	独立终端
+Resize terminal panes	调整终端面板大小
+Failed to create terminal	创建终端失败
+Stop subagent	停止子智能体
+Stop Subagent	停止子智能体
+Best-of-N Started	多候选生成已开始
+Best-of-N Ended	多候选生成已结束
+Full Error	完整错误信息
+Previous question	上一个问题
+Next question	下一个问题
+Cancel questionnaire	取消问答
+Confirm Browser Interaction	确认浏览器操作
+Mention Page	引用页面
+Capture screenshot	截取屏幕
+Capture console logs	收集控制台日志
+Deny setting up browser	拒绝设置浏览器
+Open Browser Setup	打开浏览器设置
+Cancel step	取消此步骤
+Unknown edit	未知编辑
+Click to copy full command	点击复制完整命令
+Open search in external browser	在外部浏览器中打开搜索
+Allow once	仅允许一次
+Click to learn more about sources	点击了解来源详情
+Logs	日志
+Errors	错误
+This command ran in the sandbox.	此命令已在沙箱中运行。
+view full search results	查看完整搜索结果
+Unknown file edit	未知文件编辑
+Mouse button released	鼠标按键已松开
+Mouse button pressed	鼠标按键已按下
+View Page	查看页面
+Send Now	立即发送
+Confirm Undo	确认撤销
+Revert file changes	还原文件更改
+Remove audio	移除音频
+Undo To Here	撤销至此处
+Proceed with Plan	按计划执行
+Open in Preview Pane	在预览面板中打开
+Open with External Browser	使用外部浏览器打开
+Create fork in current workspace	在当前工作区创建会话分支
+Create fork in shared workspace	在共享工作区创建会话分支
+Create fork in new workspace	在新工作区创建会话分支
+Fork warning	创建分支提示
+Failed to fork conversation	创建会话分支失败
+Fork Conversation	创建会话分支
+Generations	生成记录
+Edit permission target	编辑权限目标
+Resize side question panel	调整旁支问题面板大小
+Drag to resize, double-click to reset	拖动调整大小，双击重置
+Previous side question	上一个旁支问题
+Next side question	下一个旁支问题
+Delete side question	删除旁支问题
+Minimize side question	最小化旁支问题
+Thinking...	正在思考……
+Thinking	正在思考
+Thought Process	思考过程
+Thinking Process	思考过程
+Reasoning	思考摘要
+Thinking for	已思考
+Working...	正在处理……
+Why are you opting out?	为什么不使用此功能？
+(Optional) Tell us more...	（选填）请补充说明……
+Reason for opting out	不使用的原因
+Too many surveys	调查过于频繁
+The current trigger rate is too high.	当前触发频率过高。
+Prompt too simple	问题过于简单
+Not suitable for Best-of-N	不适合多候选生成
+In a rush	急需结果
+Why are you opting out of auto-triggered Best-of-N?	为什么不使用自动触发的多候选生成？
+(Optional) Tell us more or type your reason...	（选填）请补充说明或输入原因……
+Don't show this for 2 days	两天内不再显示
+Copy debug info	复制调试信息
+Verification required	需要验证
+Complete verification	完成验证
+Agent terminated due to error	智能体因错误而终止
+See Plans	查看套餐
+Select another model	选择其他模型
+Baseline model quota reached	基础模型额度已用尽
+Enable Overages	启用超额用量
+Error Loading Models	加载模型出错
+No Models Available	暂无可用模型
+Select Model to Send Message	选择模型以发送消息
+Workspace mismatch actions	工作区不匹配的处理操作
+More info	更多信息
+Global Permission Settings	全局权限设置
+Click to copy URL	点击复制网址
+Could not create project	无法创建项目
+Workspace setup warning	工作区设置警告
+Custom agents are not available in Best of N mode.	多候选生成模式不支持自定义智能体。
+Failed to start Best of N mode	启动多候选生成失败
+Failed to start conversation	启动会话失败
+Failed to proceed	继续执行失败
+Failed to continue	继续失败
+Failed to create worktree	创建工作树失败
+No branches	暂无分支
+Worktrees are a git feature. This folder is shared as is.	工作树是 Git 功能。此文件夹将直接共享使用。
+Select branch	选择分支
+Configure Worktree Branches	配置工作树分支
+Select Worktree	选择工作树
+New worktree	新建工作树
+Select Default Branch	选择默认分支
+Configure Branches	配置分支
+Disabled. Open the plugin page to finish setup.	暂不可用，请打开插件页面完成设置。
+Copy full URL to clipboard	复制完整网址
+Insert in terminal	插入终端
+At mention code block	引用代码块
+Copy Link	复制链接
+Table options	表格选项
+Media actions	媒体操作
+Inline Widget	内嵌组件
+Edit Model	编辑模型
+Usage	用量
+Model URL info	模型网址说明
+Max tokens until compaction info	压缩前最大词元数说明
+Manifest Changes	清单更改
+True changes vs the parent workspace	相对于父工作区的实际更改
+Agent Edits	智能体编辑
+Files modified by the agent in this conversation	智能体在此会话中修改的文件
+Uncommitted	未提交
+Staged index changes and working tree changes	已暂存和工作区中的更改
+Branch	分支
+Staged Changes	已暂存的更改
+Changes	更改
+Branch Changes	分支更改
+Telemetry is disabled in Settings	设置中已禁用遥测
+Cancel recording	取消录制
+Run in your current workspace	在当前工作区运行
+Run in a new worktree	在新工作树中运行
+Number of responses	回复数量
+Best of N	多候选生成
+BoN	多候选生成
+Screen Recording	屏幕录制
+View comments	查看评论
+Queued messages	排队中的消息
+Mention	引用
+Screenshot	截图
+Console logs	控制台日志
+Invalid Media	无效媒体
+Error fetching MCP prompt	获取 MCP 提示词出错
+Failed to stop agent	停止智能体失败
+Toggle file diff	显示或隐藏文件差异
+Search	搜索
+Copy File Path	复制文件路径
+Copy File Name	复制文件名
+Clear filter	清除筛选
+Cancel All Tasks	取消全部任务
+Cancel Task	取消任务
+What counts as a document	哪些内容属于文档
+Documents	文档
+Stop All Subagents	停止全部子智能体
+Open Terminal	打开终端
+Uploads	上传文件
+Open in new window	在新窗口中打开
+Export as PDF	导出为 PDF
+Antigravity Interactive HTML	Antigravity 交互式 HTML
+Copy to clipboard	复制到剪贴板
+Export artifact	导出成果文件
+Open in Notebook View	在笔记本视图中打开
+Copy Content	复制内容
+File path breadcrumbs	文件路径导航
+Open Full View	打开完整视图
+Custom View	自定义视图
+Match case	区分大小写
+Match whole word	全字匹配
+Use regular expression	使用正则表达式
+Find	查找
+Previous match	上一个匹配项
+Next match	下一个匹配项
+Toggle sidebar	显示或隐藏侧边栏
+Open File	打开文件
+Search tabs, files, plugins, subagents, artifacts, tasks...	搜索标签页、文件、插件、子智能体、成果和任务……
+Search for content to open	搜索要打开的内容
+Search results	搜索结果
+Close tab	关闭标签页
+Close other tabs	关闭其他标签页
+Close tabs to the right	关闭右侧标签页
+New tab	新建标签页
+Pinned Conversations	置顶会话
+Blocked	已受阻
+Dismiss notification	关闭通知
+Recent files	最近文件
+Search file contents...	搜索文件内容……
+Search for conversations...	搜索会话……
+Search projects...	搜索项目……
+Failed to create workspace.	创建工作区失败。
+Search workspaces...	搜索工作区……
+Add recent remote workspace	添加最近使用的远程工作区
+Input required	需要输入
+Run command	运行命令
+Administrator access (UAC)	管理员权限（UAC）
+File access	文件访问
+Open URL	打开网址
+Read URL	读取网址
+MCP tool	MCP 工具
+Run JS	运行 JavaScript
+Approval	审批
+Collapse toast	收起通知卡片
+Dismiss toast	关闭通知卡片
+Other (write your answer)	其他（请填写）
+Previous toast	上一条通知
+Next toast	下一条通知
+Conversation unavailable	会话不可用
+Mark all as read	全部标记为已读
+More Actions	更多操作
+Display	显示
+New Group	新建分组
+Move to Group	移至分组
+Group name	分组名称
+Billing model	计费方式
+Pay as you go	按量付费
+Available licenses	可用许可证
+Use theme to be imported with settings	使用随设置导入的主题
+Select your license	选择许可证
+Managed by Enterprise Gateway	由企业网关管理
+Device Name	设备名称
+Enter device name...	输入设备名称……
+Show Remote Control QR code	显示远程控制二维码
+Open in Remote Control	在远程控制中打开
+Local Windows environment	本地 Windows 环境
+Delete command	删除命令
+Auto (detected)	自动（已检测）
+Extension	扩展
+Hub	主应用
+IDE (editor)	集成开发环境（编辑器）
+External	外部
+Enterprise	企业
+Operating System	操作系统
+Host Environment	宿主环境
+Binary	可执行程序
+User Type	用户类型
+UI Actions	界面操作
+Refresh quota and credits data	刷新额度与积分数据
+Manage your notification preferences.	管理通知偏好。
+Remove	移除
+Copy path	复制路径
+Configure workspace-specific permissions, resources, and customizations.	配置此工作区的权限、资源和自定义设置。
+Workspace File Access	工作区文件访问权限
+Read Files	读取文件
+Paths the agent can read inside this workspace.	智能体在此工作区内可读取的路径。
+Enter file or directory path...	输入文件或目录路径……
+Write Files	写入文件
+Paths the agent can modify inside this workspace.	智能体在此工作区内可修改的路径。
+Workspace Command Access	工作区命令权限
+Terminal commands the agent can execute in this workspace.	智能体在此工作区内可执行的终端命令。
+Enter command (e.g., git, blaze)...	输入命令（例如 git、blaze）……
+Commands the agent can run outside the sandbox in this workspace.	智能体在此工作区内可在沙箱外运行的命令。
+Workspace Web Access	工作区网络访问权限
+URLs the agent can read or open in this workspace.	智能体在此工作区内可读取或打开的网址。
+Enter URL pattern...	输入网址匹配模式……
+URLs the agent can actuate on in this workspace.	智能体在此工作区内可操作的网址。
+Organization Allowed Domains (Read-Only)	组织允许的域名（只读）
+Configure GitHub access policies.	配置 GitHub 访问策略。
+Permission Preset	权限预设
+Permission Settings	权限设置
+Paths the agent can read.	智能体可读取的路径。
+Paths the agent can modify.	智能体可修改的路径。
+Terminal commands the agent can execute.	智能体可执行的终端命令。
+Commands the agent can run outside the sandbox.	智能体可在沙箱外运行的命令。
+URLs the agent can read or open in the browser.	智能体可在浏览器中读取或打开的网址。
+URLs the agent can actuate on using the browser.	智能体可通过浏览器操作的网址。
+Workspace Creation	工作区创建
+Labs	实验功能
+Plugin Operation Error:	插件操作错误：
+Paste auth code	粘贴授权码
+Refresh MCP servers	刷新 MCP 服务器
+Options	选项
+Refresh custom agents	刷新自定义智能体
+All tools (*)	所有工具（*）
+Hook will trigger if any tool is executed.	执行任意工具时触发此钩子。
+Delete Hook	删除钩子
+Add Hook Card	添加钩子卡片
+Delete Handler	删除处理程序
+New hook name	新钩子名称
+Manage Skills	管理技能
+Refresh skills paths	刷新技能路径
+Skills Configuration Error:	技能配置错误：
+Enter directory path...	输入目录路径……
+Manage Hooks	管理钩子
+Configure hooks that run on agent lifecycle events.	配置在智能体生命周期事件中执行的钩子。
+Creating Cloud Project	正在创建云项目
+Creating Chat Bot	正在创建聊天机器人
+Installing Chat Bot	正在安装聊天机器人
+Creating Sidecar	正在创建辅助服务
+Enter bot name (optional)	输入机器人名称（选填）
+Enter avatar URL (optional)	输入头像网址（选填）
+Paste code here	在此粘贴代码
+Enable Chat	启用聊天
+Open settings menu	打开设置菜单
+Filter repositories...	筛选仓库……
+Open folder	打开文件夹
+Folder doesn't exist	文件夹不存在
+Cannot parse folder URI.	无法解析文件夹 URI。
+Failed to save project	保存项目失败
+Edit Conversation Title	编辑会话标题
+Trajectory Debug View	执行记录调试视图
+Back to home	返回首页
+Reload app	重新加载应用
+Close Settings	关闭设置
+Rename Conversation	重命名会话
+Open side-by-side view	打开并排视图
+Review pending conversations	查看待处理会话
+Generate personalized rules	生成个性化规则
+Discover helpful skills & plugins	发现有用的技能与插件
+Conversation copied as Markdown to clipboard	已将会话以 Markdown 格式复制到剪贴板
+Close split view and go to forked conversation	关闭拆分视图并进入会话分支
+Select Agent	选择智能体
+Click to open docs	点击打开文档
+New Agent Script	新建智能体脚本
+Agent options	智能体选项
+Copy error to clipboard	复制错误信息
+Branch / Ref	分支／引用
+Enter project name...	输入项目名称……
+Available workspaces	可用工作区
+Unmount workspace	卸载工作区
+Delete workspace	删除工作区
+Failed to archive workspace	归档工作区失败
+Workspace archived successfully	工作区已归档
+Rename Group	重命名分组
+Customize Sections	自定义分区
+Open in preview	在预览中打开
+Goals	目标
+Links	链接
+Modified Files	已修改文件
+Sent to Chief of Staff	已发送给总管助手
+Close Sidebar	关闭侧边栏
+Hourly	每小时
+Weekly	每周
+Monday	星期一
+Tuesday	星期二
+Wednesday	星期三
+Thursday	星期四
+Friday	星期五
+Saturday	星期六
+Sunday	星期日
+Cron expression e.g. 0 */6 * * *	Cron 定时表达式，例如 0 */6 * * *
+Prompt to run when triggered...	触发时执行的提示词……
+Edit automation title	编辑自动化任务标题
+Enter a prompt for the agent to run...	输入智能体要执行的提示词……
+Failed to create automation.	创建自动化任务失败。
+New Automation	新建自动化任务
+Add automation	添加自动化任务
+Prompt to execute on schedule...	按计划执行的提示词……
+Type	类型
+Command	命令
+Uptime	运行时长
+Edit task title	编辑任务标题
+Open project settings	打开项目设置
+Updates to your sidebar	侧边栏更新
+Current workspace	当前工作区
+Archive project	归档项目
+Archive Workspace	归档工作区
+Settings Unavailable	设置不可用
+Model selector loading	正在加载模型选择器
+Copy this subtree JSON	复制此子树的 JSON
+Copy raw string value	复制原始字符串
+Copy value	复制值
+Copy thinking	复制思考内容
+Copy output	复制输出
+Copy section content	复制此部分内容
+Copy description	复制说明
+Copy schema JSON	复制结构定义 JSON
+Copy trajectory ID	复制执行记录 ID
+System Prompt	系统提示词
+Previous match (Shift+Enter)	上一个匹配项（Shift+Enter）
+Next match (Enter)	下一个匹配项（Enter）
+Clear search (Esc)	清除搜索（Esc）
+First	第一项
+Last	最后一项
+Execution ID	执行 ID
+Termination	终止
+Steps	步骤
+Start Snapshot	开始快照
+End Snapshot	结束快照
+Execution Metadata	执行元数据
+Cascade Config	Cascade 配置
+System Instruction	系统指令
+Generator Metadata	生成器元数据
+Invocation	调用
+Time to First Token (TTFT)	首个词元响应时间（TTFT）
+Streaming Generation	流式生成
+Tool Call Generation	工具调用生成
+Queue Wait	排队等待
+Tool Execution	工具执行
+Step	步骤
+Step Type	步骤类型
+Step Details	步骤详情
+Trajectory ID	执行记录 ID
+Open in Trajectory Dashboard	在执行记录面板中打开
+Trajectory Metadata	执行记录元数据
+Search steps...	搜索步骤……
+By phase	按阶段
+By step type	按步骤类型
+Activity	活动
+Zoom out	缩小
+Zoom in	放大
+All	全部
+Fit the whole trajectory	适配完整执行记录
+Double-click to reset panel sizes	双击重置面板大小
+View child subagents	查看子智能体
+Debug view layout	调试视图布局
+Side-by-side layout	并排布局
+Stacked layout	上下布局
+Search across files...	跨文件搜索……
+Refresh customizations	刷新自定义配置
+Close panel	关闭面板
+Search all skills on Agent Market…	搜索智能体市场中的所有技能……
+Refresh skills	刷新技能
+Close skills panel	关闭技能面板
+Search skills…	搜索技能……
+Copy email address	复制邮箱地址
+Notification Preferences	通知偏好
+Open Preferences	打开偏好设置
+Open Folder (Interactive)	打开文件夹（交互选择）
+Got it	知道了
+Block	阻止
+GitHub Personal Access Token	GitHub 个人访问令牌
+(empty)	（空）
+Remove policy	移除策略
+Workflow files	工作流文件
+Workflow refs	工作流引用
+Delete repository policy	删除仓库策略
+Delete organization policy	删除组织策略
+GitHub Policies	GitHub 策略
+GitHub Permissions	GitHub 权限
+Manage fine-grained permissions for GitHub.	管理 GitHub 的精细权限。
+Reset to preset	恢复为预设
+Scroll position	滚动位置
+Target text in PDF...	PDF 中的目标文字……
+Write a comment...	填写评论……
+Toggle Thumbnails	显示或隐藏缩略图
+Download PDF	下载 PDF
+Previous Page	上一页
+Current Page	当前页
+Next Page	下一页
+Clear Search	清除搜索
+Open Search	打开搜索
+Zoom Level	缩放比例
+More toolbar actions	更多工具栏操作
+More	更多
+Dismiss text selection notice	关闭文字选择提示
+Standalone	独立模式
+Zoom out (-)	缩小（-）
+Reset zoom	重置缩放
+Reset zoom (0)	重置缩放（0）
+Zoom in (+)	放大（+）
+Download SVG	下载 SVG
+Close (Esc)	关闭（Esc）
+Team of subagents to do long running work	由子智能体团队处理耗时任务
+Show a floating notification card when background conversations need your input. Answer questions, approve commands, and grant permissions without leaving your current conversation. Share feedback at go/inline-actions-feedback.	当后台会话需要你处理时显示浮动通知卡片。无需离开当前会话，即可回答问题、批准命令和授予权限。反馈地址：go/inline-actions-feedback。
+A permanent Chief of Staff conversation in the sidebar that manages your other conversations: delegate tasks, check status, and read results from one place.	在侧边栏固定一个总管助手会话，统一委派任务、查看其他会话状态和读取结果。
+Adds an Autonomous Mode switch to the modes dropdown below the input box. Turns sent with it on run non-interactively: the agent does not ask questions or request new permissions.	在输入框下方的模式菜单中添加自主模式开关。开启后发送的任务以非交互方式运行，智能体不会提问或申请新权限。
+Agent never asks for review. This maximizes the autonomy of the Agent, but also has the highest risk of the Agent operating over unsafe or injected Artifact content.	智能体从不请求审核。这会最大限度提高自主程度，但也最容易受到成果文件中的不安全内容或提示词注入影响。
+The agent auto-executes commands matched by an allow list entry.	智能体会自动执行匹配允许列表的命令。
+The agent asks for permission before executing commands matched by a deny list entry.	执行匹配拒绝列表的命令前，智能体会请求许可。
+Give the agent awareness of lint errors created by its edits so it can fix them without explicit prompting.	让智能体获知其修改引入的代码检查错误，以便主动修复。
+Enforce settings that prevent the agent from autonomously running targeted exploits and require human review for all agent actions. Visit antigravity.google/docs/strict-mode for details.	启用限制，阻止智能体自主运行针对性漏洞利用，并要求人工审核所有智能体操作。详情见 antigravity.google/docs/strict-mode。
+A shell setup script run before every command the agent executes.	智能体每次执行命令前运行的 Shell 初始化脚本。
+Run terminal commands with sandbox restrictions.	在沙箱限制下运行终端命令。
+Allow sandboxed commands to make network requests.	允许沙箱中的命令发送网络请求。
+Use the IDE's shell integration to detect and report terminal command execution. When disabled, the agent uses its own shell. Restart the application for this to take effect.	通过编辑器的 Shell 集成检测并报告终端命令执行情况。禁用时使用智能体自己的 Shell，重启应用后生效。
+Specifies the agent's behavior when asking for review on artifacts, which are documents it creates to enable a richer conversation experience.	设置智能体请求审核成果文件时的行为。成果文件是智能体创建的、用于辅助交流的文档。
+Play a sound when the agent finishes generating a response.	智能体完成回复后播放声音。
+Show browser notifications when your action is needed or execution finishes.	需要你操作或执行结束时显示浏览器通知。
+Automatically expand the Changes Overview toolbar when the agent finishes generating a response.	智能体完成回复后自动展开更改概览工具栏。
+Let the agent access past conversations to inform its responses.	允许智能体参考历史会话回答问题。
+Open files in the background if the agent creates or edits them	智能体创建或编辑文件时在后台打开这些文件
+Open the agent panel on window reload	重新加载窗口时打开智能体面板
+Replace the default browser right-click menu with quick actions.	用快捷操作替换浏览器默认的右键菜单。
+Configure the default width of markdown artifacts.	设置 Markdown 成果文件的默认宽度。
+Predict the location of your next edit and navigate you there with a tab keypress.	预测下一处编辑位置，按 Tab 键即可跳转。
+Include default customizations, such as default skills.	包含默认技能等默认自定义配置。
+Manage your conversations from the companion website.	通过配套网站管理会话。
+A nickname for identifying this application in the companion website. Changing this will restart the connection.	在配套网站中标识此应用的昵称。修改后会重新连接。
+VCS used when creating a new workspace, including workspaces generated based off your initial prompt.	新建工作区时使用的版本控制系统，也用于根据初始提示创建的工作区。
+Git-on-Borg repository used when creating a new Cog workspace from your initial prompt (e.g., chromium/src or android/platform/superproject).	根据初始提示创建 Cog 工作区时使用的 Git-on-Borg 仓库，例如 chromium/src 或 android/platform/superproject。
+Optional branch or ref used when creating a new Cog workspace (defaults to main if unset).	新建 Cog 工作区使用的分支或引用，选填，默认 main。
+Sync newly created JJ worktrees to head when starting a conversation.	开始会话时将新建的 JJ 工作树同步到最新提交。
+Dev mode: Localhost server automatically detected	开发模式：已自动检测到本地服务器
+Opens in the in-app preview pane. Some sites don't support iframe embedding and may not load.	在应用内预览面板打开。部分网站不支持内嵌，可能无法加载。
+Typing your corp password here may trigger a Password Alert reset.	在此输入公司密码可能触发 Password Alert 密码重置。
+This prompt is straightforward and does not need alternative comparisons.	此问题简单直接，不需要比较多个候选结果。
+This request is not well-suited for parallel Best-of-N generation.	此请求不适合并行生成多个候选结果。
+I prefer an immediate single response to prioritize productivity right now.	我现在更需要立即获得单个回复，提高处理效率。
+No model specified for Battle Mode, falling back to use current selected model	对比模式未指定模型，将使用当前选择的模型
+Model must be available on the Gemini API and use the gemini-api scheme.	模型必须在 Gemini API 上可用，并使用 gemini-api 协议。
+Recommended: 64,000–256,000 tokens. Actual compaction threshold may differ since max output tokens are subtracted.	建议设置为 64,000 至 256,000 个词元。由于会扣除最大输出词元数，实际压缩阈值可能不同。
+Clone current workspace into a new independent workspace	将当前工作区克隆为新的独立工作区
+Chief of Staff voice mode is active	总管助手语音模式已开启
+Couldn't load Google Drive link title	无法加载 Google Drive 链接标题
+A label for this computer when you connect from another device. Changing it reconnects.	从其他设备连接时用于标识这台电脑的名称。修改后会重新连接。
+Continue your work from another device with Remote Control. Scan the QR code or open the link below.	通过远程控制在其他设备上继续工作。扫描二维码或打开下方链接。
+Turn on a flag you don't have	启用其他功能标志
+Custom flag to turn on	要启用的自定义功能标志
+Search flags	搜索功能标志
+No matching flags	没有匹配的功能标志
+Override feature environment	覆盖功能环境
+When enabled, the values below replace the auto-detected OS, host, binary, and user type used for feature gating.	启用后，以下值会替代自动检测到的操作系统、宿主、程序类型和用户类型，用于决定功能是否可用。
+Simulate running on a different OS.	模拟在其他操作系统上运行。
+Simulate a different host (Electron, desktop or mobile Web, Extension, remote control, or installed PWA).	模拟其他宿主环境，包括 Electron、桌面或移动网页、扩展、远程控制及已安装的 PWA。
+Simulate running as a different binary (Hub or the IDE/editor).	模拟以其他程序类型运行（主应用或编辑器）。
+Simulate a different user cohort (Google, External, Enterprise).	模拟其他用户类型（Google 内部、外部或企业）。
+Workspace URI query parameter	工作区 URI 查询参数
+Sets the `workspaceUri` URL parameter and reloads, repointing the active workspace. Pick a folder from an existing project or enter a custom URI (e.g. file:///google/src/cloud/<user>/<client>/google3).	设置 workspaceUri 网址参数并重新加载，切换当前工作区。可从已有项目选择文件夹，或输入自定义 URI。
+Select or enter a workspace URI	选择或输入工作区 URI
+Workspace URI to switch to	要切换到的工作区 URI
+Workspace folder suggestions	建议的工作区文件夹
+Developer-only tools. These settings are stored locally in this browser and do not affect other users.	仅供开发者使用。这些设置存储在当前浏览器本地，不影响其他用户。
+When enabled, sandboxed commands are allowed to make network requests.	启用后，允许沙箱中的命令发送网络请求。
+When enabled, Agent will use IDE's shell integration to detect and report terminal command execution.	启用后，智能体使用编辑器的 Shell 集成检测并报告终端命令执行情况。
+Allows the agent to access files outside of your current workspace.	允许智能体访问当前工作区以外的文件。
+When enabled, 'Explain and Fix' actions will continue in the current conversation instead of starting a new one.	启用后，“解释并修复”会在当前会话继续，而不是新建会话。
+Try out early-stage features before they ship. These may be changed or removed at any time. These features are experimental, and we make no guarantees about performance or functionality.	提前体验尚在开发的功能。这些实验功能可能随时更改或移除，不保证性能或功能完整性。
+Hook will only trigger if the tool name matches run_command.	仅在工具名称为 run_command 时触发此钩子。
+Hook will only trigger if the tool name matches run_command or view_file.	仅在工具名称为 run_command 或 view_file 时触发此钩子。
+Browser tools (browser_.*)	浏览器工具（browser_.*）
+Hook will only trigger if the tool name starts with browser_.	仅在工具名称以 browser_ 开头时触发此钩子。
+When enabled, the agent will include default customizations, including default skills.	启用后，智能体会包含默认技能等默认自定义配置。
+Select the workspace type that will be used for new conversations started with the New Workspace option.	选择使用“新建工作区”开始会话时的工作区类型。
+A shell setup script run before every command the agent executes in this project. Overrides the global script.	智能体在此项目每次执行命令前运行的 Shell 初始化脚本，会覆盖全局脚本。
+Failed to unarchive project: project management feature not available	无法取消归档项目：项目管理功能不可用
+Enter workspace name (e.g., my-feature)	输入工作区名称（例如 my-feature）
+Enter workspace name (e.g., my-cog-feature)	输入工作区名称（例如 my-cog-feature）
+Chief of Staff voice message failed	总管助手语音消息发送失败
+Chief of Staff voice mode stopped	总管助手语音模式已停止
+Dismiss service announcement	关闭服务公告
+This tool output was truncated (cut off) because it exceeded the single-step limits. Details are visible in the Inspector.	工具输出超过单步限制，已被截断。完整详情可在检查器中查看。
+Drag to resize the gutter; double-click to fit it automatically	拖动调整分隔栏大小，双击自动适配
+Click to go there, drag to select a range, drag an edge to resize	点击跳转，拖动选择范围，拖动边缘调整大小
+One row per step, in order — scroll to move through the run	每行显示一个步骤，按执行顺序排列，滚动查看整个过程
+Every step packed into a lane per kind — no rows, no scrolling	同类步骤归入同一条轨道，不按步骤分行
+How long a quiet interval must be before it collapses	空闲间隔超过此时长后会被折叠
+What the step bars are coloured by	步骤条的颜色分类依据
+One lane per kind of step, or one per step type	按步骤种类或步骤类型分配轨道
+Steps and containers shorter than this fade back	短于此时长的步骤和容器会淡化显示
+The debug view loads the trajectory in pages. Click the marker at either end of the overview, or keep panning past that end, to load more.	调试视图分页加载执行记录。点击概览两端的标记，或继续向边缘平移，可加载更多。
+Notification Preferences	通知偏好
+Enable fine-grained GitHub permissions and define the org, repository, and resource-level access the agent is allowed to use.	启用精细的 GitHub 权限，定义智能体可访问的组织、仓库和资源范围。
+and select	并选择
+to have the agent generate a plan.	让智能体生成计划。
+User cancelled agent execution.	用户已取消执行。
+Use Global Settings	使用全局设置
+Turbo Mode	完全访问模式
+Turbo mode	完全访问模式
+Learn more about Turbo Mode	了解完全访问模式
+Learn more about Turbo mode	了解完全访问模式
+Inherit Global	继承全局设置
+Learn more about Inherit Global	了解如何继承全局设置
+The breakdown below shows token usage from customizations like rules, skills, and MCP. If a budget is exceeded, large rules are demoted to path pointers and large customizations are excluded automatically.	下方明细显示规则、技能和 MCP 等定制内容占用的标记数。超出预算时，较大的规则会改为仅提供文件路径，体积较大的定制内容会自动排除。
+Interactive guide to design and create a scheduled background automation. Use this skill when the user wants to create an automated or recurring scheduled task (e.g. "summarize my emails every morning", "every Monday send me a to-do list"). Also triggered by the /automation slash command.	引导设计并创建后台定时任务，适用于自动执行或周期性任务，例如每天早晨汇总邮件、每周一生成待办清单。也可通过 /automation 命令调用。
+How to render rich interactive HTML widgets inline in the chat or as standalone artifacts. Use this skill when you want to show the user diagrams, data visualizations, interactive controls, educational walkthroughs, or any rich visual content beyond plain text and markdown.	在聊天中或独立页面中展示交互式 HTML 内容，适用于图解、数据可视化、交互控件和教学演示等丰富的视觉内容。
+Automatically migrate legacy workflows to modern skills across global and workspace configurations. Scans for existing workflows, creates target SKILL.md files, and safely archives old workflow files.	将全局配置和工作区中的旧工作流迁移为技能。扫描已有工作流，创建对应的 SKILL.md 文件，并归档旧文件。
+Guidelines for interacting with GitHub and request permissions from the user when commands fail due to restrictions in the agent environment.	指导与 GitHub 交互；当命令因智能体运行环境限制而失败时，向用户请求所需权限。
+How to manage and create plugins — namespaced bundles of skills, agents, rules, MCP servers and hooks that install, enable and disable as a single unit. Use this skill when the user wants to enable, disable, install or uninstall a plugin, when they want to create a new plugin, or when a new customization should be packaged into a plugin rather than left loose. Also triggered by the /plugin slash command. Don't use for the underlying customization system itself — discovery roots, loading priority, or authoring a standalone skill, agent, rule, hook or MCP server outside a plugin; see the customizations guide skill for those.	管理和创建插件，将技能、智能体、规则、MCP 服务器和钩子统一打包、安装及启用。适用于插件安装、卸载、启停和创建，也可通过 /plugin 调用。定制系统的发现目录、加载优先级和独立组件编写，请参阅定制系统指南。
+Discover UI plugin panels relevant to the current task and surface a one-click pill in chat to open (toggle) them in the side pane. Use when a running UI plugin's panel would help with what the user is doing, or right after the user enables a new UI plugin pane and a shortcut to open it is handy.	发现与当前任务相关的插件面板，并在聊天中提供一键打开侧栏面板的入口。适用于需要使用现有插件面板，或刚启用新面板的场景。
+Windows & PowerShell terminal execution rules for Antigravity agents.	反重力智能体在 Windows 和 PowerShell 中执行终端命令的规则。
+Skills	技能
+Hide breakdowns	收起明细
+Show breakdowns	展开明细

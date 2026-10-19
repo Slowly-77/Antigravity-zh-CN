@@ -1,0 +1,45 @@
+<!doctype html><meta charset="utf-8">
+<link rel="stylesheet" href="../src/chat-layout.css">
+<style>
+body{font:14px Arial;margin:24px;color:#222} #scene{width:900px;margin:auto}#result{display:none}
+[data-testid="autoscroll-viewport"]{height:480px;overflow-y:auto;container-type:size;overflow-anchor:none}
+.mx-auto{width:100%;margin:auto}.turn{display:flex;align-items:flex-start}.turn>div{width:100%}.user{text-align:right;padding:16px}.reply{padding:24px 8px}
+[data-testid="agent-input-box"]{border:1px solid #ddd;border-radius:24px;padding:12px}.editor{height:48px;padding:8px}
+.footer,.left,.middle,.model-parent,.controls,.mic-send{display:flex;align-items:center;gap:4px}.footer{width:100%;justify-content:space-between}.left{flex:1;min-width:0}.hidden{display:none}button{font:inherit;border:0;background:transparent;border-radius:6px;padding:6px;cursor:pointer}.mic-send button{width:32px;height:32px}.send{background:#222;color:white;border-radius:50%}.ag-context-model-row{display:flex;align-items:center}
+</style>
+<div id="scene"><div data-testid="autoscroll-viewport"><div class="mx-auto"><div id="content"><div id="history"></div><div class="turn" style="min-height:calc(100cqh - 32px)"><div data-turn-content="latest"><div class="user">测试</div><div class="reply">收到，连接与响应正常。</div></div></div><div style="height:48px"></div></div></div></div>
+<div data-testid="agent-input-box"><div class="editor">向反重力提问，输入 @ 引用上下文，/ 执行操作</div><div class="footer @container/input-footer"><div class="left"><button id="attach">＋</button><input class="hidden"><div class="middle"><div class="model-parent"><div><div class="ag-context-model-row"><button data-testid="model-selector-trigger">Gemini 3.8 Flash 高⌄</button></div></div></div></div></div><div class="controls"><div class="mic-send"><button id="mic">♩</button><button class="send" data-testid="send-button">↑</button></div></div></div></div></div><pre id="result"></pre>
+<script src="../src/context-meter.js"></script><script src="../src/chat-layout.js"></script><script>
+const trigger=document.querySelector('[data-testid="model-selector-trigger"]');
+const originalInput={showPermissionsSelector:false,enableMicrophone:true};const savedPermissions={mode:'default',inherited:true};const before=JSON.stringify(savedPermissions);let settingsOpens=0;
+const features={getCache:new Map([['inputComponent',originalInput],['projectManagementFeature',{}],['isRemoteControl',false]]),get(k){return this.getCache.get(k)}};
+const modal={triggerShowSettingsModal(args){if(args.targetScreen!=='General'||args.targetSection!=='agent-permissions')throw Error('wrong settings destination');settingsOpens++}};
+trigger.__reactFiber$test={memoizedProps:{value:features},return:{memoizedProps:{value:modal}}};
+installChatLayout();installContextMeter();
+const wait=()=>new Promise(r=>setTimeout(r,100));const bounds=n=>n.getBoundingClientRect();const vp=document.querySelector('[data-testid="autoscroll-viewport"]');
+(async()=>{let passed=[];const check=(name,yes)=>{if(!yes)throw Error(name);passed.push(name)};await wait();
+const ring=document.querySelector('.ag-context-meter'),attach=document.querySelector('#attach'),mic=document.querySelector('#mic');
+check('circle precedes model',trigger.previousElementSibling===ring);
+check('model group aligns to microphone on right',bounds(mic).left-bounds(trigger).right<30&&bounds(trigger).left>500);
+check('same baseline',Math.abs(bounds(trigger).top-bounds(mic).top)<8);
+check('feature flags and permissions stay native',features.get('inputComponent')===originalInput&&originalInput.showPermissionsSelector===false);
+check('permission values unchanged during initialization',JSON.stringify(savedPermissions)===before);
+const fallback=document.querySelector('.ag-permission-fallback');check('settings entry follows attach on left',bounds(fallback).left-bounds(attach).right<12);
+fallback.click();check('fallback opens native permission section',settingsOpens===1&&JSON.stringify(savedPermissions)===before);
+const native=document.createElement('button');native.dataset.testid='permissions-selector-trigger';native.innerHTML='<svg width="16" height="16"><path d="M8 1L14 4V9L8 15L2 9V4Z" fill="none" stroke="currentColor"/></svg><span>Turbo</span><svg width="14" height="14"></svg>';document.querySelector('.controls').prepend(native);await wait();
+check('native selector replaces fallback',!document.querySelector('.ag-permission-fallback'));
+check('native permission selector on left',bounds(native).left-bounds(attach).right<12&&bounds(native).right<bounds(ring).left);
+check('full access native label and orange color',native.textContent==='完全访问'&&getComputedStyle(native).color==='rgb(230, 92, 38)');
+check('React model and permissions DOM parents preserved',native.parentElement.classList.contains('controls')&&trigger.parentElement.parentElement.parentElement.classList.contains('model-parent'));
+check('no permission write when native UI appears',JSON.stringify(savedPermissions)===before);
+check('last turn has no viewport-height filler',bounds(document.querySelector('.turn')).height<150);
+check('short conversation sits near input',Math.abs(bounds(vp).bottom-bounds(document.querySelector('.turn')).bottom-48)<2);
+const history=document.querySelector('#history');history.style.height='1500px';vp.scrollTop=vp.scrollHeight;await wait();check('long conversation ends without blank screen',Math.abs(bounds(vp).bottom-bounds(document.querySelector('.turn')).bottom-48)<2);
+vp.scrollTop=200;await wait();document.querySelector('.reply').textContent+=' 正在流式生成。';await wait();check('reading history is not pulled to bottom',vp.scrollTop===200);
+vp.scrollTop=vp.scrollHeight;const prior=vp.scrollTop;document.querySelector('.reply').style.height='250px';vp.scrollTop=vp.scrollHeight;await wait();check('streaming reply fits actual content height',vp.scrollTop>prior&&Math.abs(bounds(vp).bottom-bounds(document.querySelector('.turn')).bottom-48)<2);
+history.style.height='0px';document.querySelector('.reply').style.height='';vp.scrollTop=vp.scrollHeight;await wait();check('switch from long to short removes empty space',vp.scrollTop===0&&Math.abs(bounds(vp).bottom-bounds(document.querySelector('.turn')).bottom-48)<2);
+document.querySelector('#scene').style.width='360px';await wait();check('narrow footer stays inside composer',bounds(mic).right<bounds(document.querySelector('#scene')).right+1&&document.querySelector('.footer').scrollWidth<=document.querySelector('.footer').clientWidth+1);
+trigger.remove();await wait();check('removed model cleans context popup',!document.querySelector('.ag-context-panel'));
+result.textContent=JSON.stringify({ok:true,count:passed.length,passed},null,2);
+})().catch(e=>result.textContent=JSON.stringify({ok:false,error:e.message}));
+</script>

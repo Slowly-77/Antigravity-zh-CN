@@ -1,0 +1,9 @@
+{
+  "nativePreloadSha256": [
+    "6dd8234d121514f049f84726d2715b81e44ebee9a8ccf03299d71234e272f870"
+  ],
+  "testedVersions": [
+    "2.23.1",
+    "2.24.0"
+  ]
+}
