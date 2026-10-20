@@ -22,6 +22,7 @@ node tests/restore-test.cjs
 node tests/prepare-background-test.cjs
 node tests/run-browser-tests.cjs background-startup-test
 node tests/run-browser-tests.cjs metrics-test
+node tests/run-browser-tests.cjs metrics-recovery-test
 node tests/run-browser-tests.cjs composer-scroll-test
 node tests/run-browser-tests.cjs context-test
 node tests/run-browser-tests.cjs history-navigation-test
@@ -32,6 +33,8 @@ node tests/run-browser-tests.cjs codex-chat-test
 自动适配测试默认使用本机客户端作只读输入，也可以通过 `AG_TEST_BASE_ASAR` 指定合法获得的本地资源。所有变更测试均在临时目录进行。安装器和还原测试模拟客户端进程，不会真的替换本机程序。
 
 浏览器测试需要 Microsoft Edge。测试使用独立的临时浏览器资料，不读取日常浏览器数据。页面测试基于模拟数据和自写基础样式，不等于每个未来客户端版本的实机验收。
+
+`metrics-recovery-test` 覆盖请求挂起、超时重试、切换会话后迟到的结果、工具执行期间的平均速度、额度恢复和减少布局扫描。用模拟计时触发超时，不需要真的等待网络故障，也不发送模型消息。
 
 ## 发布前
 

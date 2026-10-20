@@ -175,7 +175,12 @@ function installChatLayout() {
     if (!pending) { pending = true; setTimeout(scan, 16); }
   }
   const observer = new MutationObserver(mutations => {
-    if (mutations.some(m => m.type === 'childList' || m.target.parentElement?.closest(selector))) schedule();
+    if (mutations.some(m => {
+      const element = m.target.nodeType === 1 ? m.target : m.target.parentElement;
+      // Updating speed and quota must not rescan and measure the whole chat.
+      if (element?.closest('.ag-usage-strip, .ag-context-panel, .ag-history-rail, .ag-history-preview')) return false;
+      return m.type === 'childList' || m.target.parentElement?.closest(selector);
+    })) schedule();
   });
   observer.observe(document.body, {childList:true, subtree:true, characterData:true, attributes:true, attributeFilter:['class','style']});
   window.addEventListener('resize', schedule, {passive:true});

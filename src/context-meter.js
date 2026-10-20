@@ -3,9 +3,17 @@ function installContextMeter(createHistoryNavigation = window.installHistoryNavi
   window.__agContextMeterInstalled = true;
   const records = new Map();
   let opened = null, pending = false;
-  const quota = {service:null, groups:null, nextRead:0, loading:false, failed:false};
+  const quota = {service:null, groups:null, nextRead:0, loading:false, failed:false, updatedAt:0};
   const positive = value => Number.isFinite(Number(value)) && Number(value) > 0 ? Number(value) : null;
   const number = value => Math.round(value).toLocaleString('zh-CN');
+  // A stalled local RPC must not permanently lock the meter's loading flag.
+  function readWithTimeout(read) {
+    let timer;
+    return Promise.race([
+      Promise.resolve().then(read),
+      new Promise((_, reject) => { timer = setTimeout(() => reject(Error('Meter read timed out')), 8000); })
+    ]).finally(() => clearTimeout(timer));
+  }
 
   function findBindings(trigger) {
     let provider = null, service = null, selectedModel = null, settingsModal = null;
@@ -89,9 +97,12 @@ function installContextMeter(createHistoryNavigation = window.installHistoryNavi
     return null;
   }
 
-  function averageSpeed(entries) {
+  function averageSpeed(entries, steps = []) {
     let tokens = 0, duration = 0;
     for (const entry of entries || []) {
+      // FULL snapshots can include the request still generating. Only aggregate
+      // completed samples, including when the agent is waiting or running tools.
+      if (entry.stepIndices?.some(index => steps[index]?.step?.case === 'plannerResponse' && steps[index].status !== 3)) continue;
       const sample = readSpeed([entry]);
       if (sample) { tokens += sample.tokens; duration += sample.duration; }
     }
@@ -130,15 +141,18 @@ function installContextMeter(createHistoryNavigation = window.installHistoryNavi
 
   function refreshQuota(service) {
     if (typeof service?.retrieveUserQuotaSummary !== 'function') return;
-    if (quota.service !== service) Object.assign(quota, {service, groups:null, nextRead:0, loading:false, failed:false});
+    if (quota.service !== service) Object.assign(quota, {service, groups:null, nextRead:0, loading:false, failed:false, updatedAt:0, request:null});
     if (quota.loading || Date.now() < quota.nextRead) return;
+    const request = quota.request = {};
     quota.loading = true; quota.nextRead = Date.now() + 60000;
-    Promise.resolve().then(() => service.retrieveUserQuotaSummary({})).then(response => {
-      if (quota.service !== service) return;
+    readWithTimeout(() => service.retrieveUserQuotaSummary({})).then(response => {
+      if (quota.request !== request) return;
       quota.groups = response?.response?.groups || [];
-      quota.failed = false;
-    }).catch(() => { if (quota.service === service) quota.failed = true; }).finally(() => {
-      if (quota.service === service) quota.loading = false;
+      quota.failed = false; quota.updatedAt = Date.now();
+    }).catch(() => {
+      if (quota.request === request) { quota.failed = true; quota.nextRead = Date.now() + 30000; }
+    }).finally(() => {
+      if (quota.request === request) quota.loading = false;
       schedule();
     });
   }
@@ -146,7 +160,7 @@ function installContextMeter(createHistoryNavigation = window.installHistoryNavi
   function quotaBucket(model, windowName) {
     const label = model?.label || '';
     const prefix = /gemini/i.test(label) ? 'gemini-' : /claude|gpt/i.test(label) ? '3p-' : null;
-    if (!prefix || model?.isCustom || quota.failed) return null;
+    if (!prefix || model?.isCustom || quota.failed || Date.now() - quota.updatedAt > 90000) return null;
     const groups = quota.groups?.filter(group => group.buckets?.some(bucket => bucket.bucketId?.startsWith(prefix))) || [];
     if (groups.length !== 1) return null;
     return groups[0].buckets.find(bucket => bucket.window === windowName) || null;
@@ -236,42 +250,48 @@ function installContextMeter(createHistoryNavigation = window.installHistoryNavi
     const usage = latestPage ? readUsage(slice?.generatorMetadatasInSlice) : null;
     if (record.conversation !== conversation) {
       record.conversation = conversation;
-      record.cachedUsage = null; record.requestKey = null;
+      record.cachedUsage = null; record.requestKey = null; record.request = null; record.loading = false;
       record.speed = null; record.average = null; record.averageKey = null; record.nextRead = 0;
       record.stream = null; record.liveSpeed = null;
       record.history?.reset(conversation);
     }
     const wasLive = !!record.liveSpeed;
     record.liveSpeed = liveSpeed(record, state);
-    if (wasLive && !record.liveSpeed) { record.nextRead = 0; record.requestKey = null; }
+    if (wasLive && !record.liveSpeed && ![2,4].includes(state?.status)) { record.nextRead = 0; record.requestKey = null; }
     const lastResponse = slice?.stepsInSlice?.findLast(step => step.step?.case === 'plannerResponse');
     const speed = latestPage ? stepSpeed(lastResponse) || readSpeed(slice?.generatorMetadatasInSlice) : null;
     if (speed) record.speed = speed;
     const averageKey = [conversation, slice?.trajectoryId, slice?.totalGeneratorMetadataLength, slice?.totalStepsLength].join(':');
     const busy = [2,4].includes(state?.status);
-    if (!busy && record.averageKey !== averageKey) record.average = null;
+    if (record.wasBusy && !busy) {
+      record.nextRead = 0; record.requestKey = null;
+      quota.nextRead = Math.min(quota.nextRead, Date.now() + 1000);
+    }
+    record.wasBusy = busy;
     if (usage?.used != null && usage?.capacity != null && speed && (busy || record.averageKey === averageKey) && (!record.history || record.history.hasIndex(conversation))) return usage;
     // PROD_UI omits prompt details. Use the same read-only FULL request as the
     // built-in inspector; keep aggregates and short navigation captions in memory.
-    const key = [conversation, slice?.trajectoryId, slice?.totalGeneratorMetadataLength, slice?.totalStepsLength, state?.status].join(':');
+    // Tool steps do not change model usage. During generation, read at most once
+    // a minute; live speed comes from the subscribed state, not FULL history.
+    const key = [conversation, slice?.trajectoryId, slice?.totalGeneratorMetadataLength, busy ? 'busy' : slice?.totalStepsLength, busy].join(':');
     if (conversation && service && !record.loading && record.requestKey !== key && Date.now() >= (record.nextRead || 0)) {
-      record.loading = true; record.requestKey = key; record.nextRead = Date.now() + 15000;
-      Promise.resolve().then(() => service.getCascadeTrajectory({cascadeId:conversation, verbosity:3})).then(response => {
-        if (record.conversation === conversation) {
+      const request = record.request = {};
+      record.loading = true; record.requestKey = key; record.nextRead = Date.now() + (busy ? 60000 : 15000);
+      readWithTimeout(() => service.getCascadeTrajectory({cascadeId:conversation, verbosity:3})).then(response => {
+        if (record.request === request && record.conversation === conversation) {
           record.cachedUsage = readUsage(response?.trajectory?.generatorMetadata);
-          record.speed = readSpeed(response?.trajectory?.generatorMetadata);
-          // Only complete, idle snapshots contribute to the session aggregate.
+          record.speed = readSpeed(response?.trajectory?.generatorMetadata) || record.speed;
+          // Recompute from one full snapshot, even while tools/retries are busy.
           // Never sum a visible page or add snapshots together: both double count history.
-          const current = provider?.getState();
-          const currentKey = [current?.conversationId || current?.trajectorySlice?.conversationId, current?.trajectorySlice?.trajectoryId, current?.trajectorySlice?.totalGeneratorMetadataLength, current?.trajectorySlice?.totalStepsLength].join(':');
-          if (!busy && ![2,4].includes(current?.status) && currentKey === averageKey) {
-            record.average = averageSpeed(response?.trajectory?.generatorMetadata);
-            record.averageKey = averageKey;
-          }
+          record.average = averageSpeed(response?.trajectory?.generatorMetadata, response?.trajectory?.steps);
+          record.averageKey = averageKey;
           record.history?.ingest(response?.trajectory?.steps, conversation);
         }
-      }).catch(() => { record.requestKey = null; record.nextRead = Date.now() + 30000; }).finally(() => {
-        record.loading = false; schedule();
+      }).catch(() => {
+        if (record.request === request) { record.requestKey = null; record.nextRead = Date.now() + 30000; }
+      }).finally(() => {
+        if (record.request === request) record.loading = false;
+        schedule();
       });
     }
     return record.cachedUsage || usage;
@@ -357,6 +377,7 @@ function installContextMeter(createHistoryNavigation = window.installHistoryNavi
   function scan() {
     pending = false;
     for (const [trigger, record] of records) if (!trigger.isConnected) {
+      record.request = null;
       if (opened === record) close();
       record.subscription?.dispose();
       record.history?.dispose();
@@ -379,7 +400,13 @@ function installContextMeter(createHistoryNavigation = window.installHistoryNavi
     if (event.key === 'Escape' && opened) { const button = opened.button; close(); button.focus({preventScroll:true}); }
   });
   window.addEventListener('resize', () => { if (opened) position(opened); });
-  new MutationObserver(schedule).observe(document.body, {childList:true, subtree:true});
+  const ownUI = '.ag-usage-strip, .ag-context-panel, .ag-history-rail, .ag-history-preview';
+  new MutationObserver(mutations => {
+    if (mutations.some(m => !(m.target.nodeType === 1 ? m.target : m.target.parentElement)?.closest(ownUI))) schedule();
+  }).observe(document.body, {childList:true, subtree:true});
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) { quota.nextRead = 0; schedule(); }
+  });
   setInterval(() => { if (!document.hidden) schedule(); }, 500);
   scan();
 }

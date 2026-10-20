@@ -1,0 +1,69 @@
+<!doctype html><meta charset="utf-8">
+<div data-testid="agent-input-box"><button id="model" data-testid="model-selector-trigger">Gemini Flash</button></div>
+<pre id="result"></pre>
+<script src="../src/context-meter.js"></script><script src="../src/chat-layout.js"></script>
+<script>
+const realTimeout=window.setTimeout.bind(window), realClear=window.clearTimeout.bind(window), deadlines=new Map();
+window.setTimeout=(fn,ms,...args)=>{const id=realTimeout(fn,ms,...args);if(ms===8000)deadlines.set(id,fn);return id};
+window.clearTimeout=id=>{deadlines.delete(id);realClear(id)};
+const wait=()=>new Promise(r=>realTimeout(r,80));
+let offset=0;const now=Date.now;Date.now=()=>now()+offset;
+const expire=async()=>{for(const fn of [...deadlines.values()])fn();await wait()};
+const sample=(tokens,seconds,index)=>({stepIndices:[index],metadata:{case:'chatModel',value:{usage:{outputTokens:tokens},streamingDuration:{seconds}}}});
+let state={conversationId:'busy',status:2,trajectorySlice:{totalGeneratorMetadataLength:3,totalStepsLength:5}};
+let entries=[sample(100,2,0),sample(200,4,1),sample(999,1,2)],steps=[{status:3,step:{case:'plannerResponse'}},{status:3,step:{case:'plannerResponse'}},{status:8,step:{case:'plannerResponse'}},{status:2,step:{case:'generic'}}];
+entries[0].stepIndices.push(3);
+let quotaCalls=0,fullCalls=0,quotaHangs=false,quotaRejects=false,holdReads=false,held=[],fraction=.75;
+const service={
+  getCascadeTrajectory:async()=>{fullCalls++;if(holdReads)return new Promise(resolve=>held.push(resolve));return {trajectory:{steps,generatorMetadata:entries}}},
+  retrieveUserQuotaSummary:async()=>{quotaCalls++;if(quotaHangs)return new Promise(()=>{});if(quotaRejects)throw Error('offline');return {response:{groups:[{buckets:[{bucketId:'gemini-5h',window:'5h',remaining:{case:'remainingFraction',value:fraction}}]}]}}}
+};
+model.__reactFiber$test={memoizedProps:{value:{selectedModel:{label:'Gemini Flash'}}},return:{memoizedProps:{value:{cascadeContext:{state:{agentStateProvider:{getState:()=>state}}}}},return:{memoizedProps:{value:service}}}};
+const update=async()=>{const n=document.createElement('i');document.body.append(n);n.remove();await wait()};
+installContextMeter();
+(async()=>{
+ const passed=[],check=(name,yes)=>{if(!yes)throw Error(name);passed.push(name)};
+ await wait();const speed=document.querySelector('.ag-speed-group'),quota=document.querySelector('.ag-quota-item');
+ check('busy tool phase displays completed session average',speed.textContent.startsWith('⚡ 50.0 tok/s'));
+ check('incomplete model request excluded from average',!speed.textContent.includes('999'));
+ check('pending tool does not exclude its finished model request',speed.textContent.startsWith('⚡ 50.0 tok/s'));
+ const initial=fullCalls;
+ state.trajectorySlice.totalStepsLength++;await update();
+ check('new tool step does not refetch full trajectory',fullCalls===initial);
+ state.trajectorySlice.totalGeneratorMetadataLength++;offset+=16000;await update();
+ check('busy full reads are limited to one per minute',fullCalls===initial);
+ offset+=45000;await update();check('changed model usage eventually refreshes',fullCalls===initial+1);
+ state.status=1;await update();check('finishing the task refreshes immediately',fullCalls===initial+2);
+ check('finishing keeps completed average',speed.textContent.startsWith('⚡ 50.0 tok/s'));
+ quotaHangs=true;offset+=61000;await update();
+ const beforeTimeout=quotaCalls;await expire();
+ check('quota timeout hides stale percentage',quota.textContent==='5h —');
+ await update();check('quota timeout backs off instead of looping',quotaCalls===beforeTimeout);
+ quotaHangs=false;fraction=.5;offset+=31000;await update();
+ check('quota recovers automatically after timeout',quota.textContent==='5h 50.0%');
+ quotaRejects=true;offset+=61000;await update();
+ check('quota rejection hides stale percentage',quota.textContent==='5h —');
+ quotaRejects=false;fraction=.4;document.dispatchEvent(new Event('visibilitychange'));await wait();
+ check('foreground refreshes quota immediately',quota.textContent==='5h 40.0%');
+ holdReads=true;state={conversationId:'hanging',status:1,trajectorySlice:{totalGeneratorMetadataLength:1,totalStepsLength:1}};await update();
+ check('new conversation clears old speed while loading',speed.textContent.startsWith('⚡ —'));
+ const hungCalls=fullCalls;await expire();holdReads=false;entries=[sample(300,3,0)];steps=[{status:3}];offset+=31000;await update();
+ check('full read timeout does not lock future reads',fullCalls===hungCalls+1&&speed.textContent.startsWith('⚡ 100.0'));
+ held.shift()({trajectory:{steps:[{status:3}],generatorMetadata:[sample(999,1,0)]}});await wait();
+ check('late timed-out result cannot replace current data',speed.textContent.startsWith('⚡ 100.0'));
+ holdReads=true;state={conversationId:'old',status:1,trajectorySlice:{totalGeneratorMetadataLength:1,totalStepsLength:1}};await update();
+ const oldReply=held.shift(),oldCalls=fullCalls;
+ state={conversationId:'new',status:1,trajectorySlice:{totalGeneratorMetadataLength:1,totalStepsLength:1}};await update();
+ check('conversation switch does not wait for old pending read',fullCalls===oldCalls+1);
+ const newReply=held.shift();oldReply({trajectory:{steps,generatorMetadata:[sample(999,1,0)]}});await wait();
+ check('old conversation reply cannot populate new conversation',speed.textContent.startsWith('⚡ —'));
+ newReply({trajectory:{steps,generatorMetadata:[sample(240,3,0)]}});await wait();
+ check('new conversation retains its own aggregate',speed.textContent.startsWith('⚡ 80.0'));
+ let layoutScans=0;const query=document.querySelectorAll.bind(document);
+ document.querySelectorAll=selector=>{if(selector==='[data-testid="user-input-step"]')layoutScans++;return query(selector)};
+ installChatLayout();await wait();const beforeLayout=layoutScans;
+ document.querySelector('.ag-speed-group span').textContent='⚡ 81.0 tok/s';await wait();
+ check('metric text updates do not rescan chat layout',layoutScans===beforeLayout);
+ result.textContent=JSON.stringify({ok:true,count:passed.length,passed},null,2);
+})().catch(e=>result.textContent=JSON.stringify({ok:false,error:e.message}));
+</script>
